@@ -1,8 +1,8 @@
 
 %define		_orig_name	xmms_sndfile
 
-Summary:	XMMS input plugin
-Summary(pl):	Wtyczka wej¶ciowa XMMS
+Summary:	XMMS input plugin that uses libsndfile to read files
+Summary(pl):	Wtyczka wej¶ciowa XMMS u¿ywaj±ca libsndfile do czytania plików
 Name:		xmms-input-sndfile
 Version:	1.2
 Release:	0.1
@@ -13,12 +13,14 @@ Source0:	http://www.zipworld.com.au/~erikd/XMMS/%{_orig_name}-%{version}.tar.gz
 URL:		http://www.xmms.org/plugins_input.html#122
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libstdc++-devel
+BuildRequires:	libsndfile-devel
 BuildRequires:	libtool
 BuildRequires:	xmms-devel >= 1.2.3
 Requires:	xmms
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		plugindir	%(xmms-config --input-plugin-dir)
 
 %description
 xmms_sndfile is an input plugin for XMMS. Using xmms_sndfile extends
@@ -51,10 +53,13 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	 DESTDIR=$RPM_BUILD_ROOT
 
+# useless
+rm -f $RPM_BUILD_ROOT%{plugindir}/*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS TODO NEWS README ChangeLog
-%attr(755,root,root) %{_libdir}/xmms/Input/*.so
+%attr(755,root,root) %{plugindir}/*.so
