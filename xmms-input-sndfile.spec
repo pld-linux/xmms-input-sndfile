@@ -17,7 +17,6 @@ BuildRequires:	libsndfile-devel
 BuildRequires:	libtool
 BuildRequires:	xmms-devel >= 1.2.3
 Requires:	xmms
-ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		plugindir	%(xmms-config --input-plugin-dir)
