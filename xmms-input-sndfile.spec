@@ -5,7 +5,7 @@ Summary:	XMMS input plugin that uses libsndfile to read files
 Summary(pl):	Wtyczka wej¶ciowa XMMS u¿ywaj±ca libsndfile do czytania plików
 Name:		xmms-input-sndfile
 Version:	1.2
-Release:	0.3
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://www.zipworld.com.au/~erikd/XMMS/%{_orig_name}-%{version}.tar.gz
