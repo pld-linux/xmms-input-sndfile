@@ -1,7 +1,8 @@
 
 %define		_orig_name	xmms_sndfile
 
-Summary:	XMMS plugin
+Summary:	XMMS input plugin
+Summary(pl):	Wtyczka wej¶ciowa XMMS
 Name:		xmms-input-sndfile
 Version:	1.2
 Release:	0.1
@@ -20,10 +21,16 @@ ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Xmms_sndfile is an input plugin for XMMS. Using xmms_sndfile extends
+xmms_sndfile is an input plugin for XMMS. Using xmms_sndfile extends
 the capabilities of XMMS to open and play any file which can be opened
 and read by libsndfile, including WAV, AIFF, AU, and SVX files and
 many compressed version of these file formats.
+
+%description -l pl
+xmms_sndfile to wtyczka wej¶ciowa dla XMMS-a. Jej u¿ycie rozszerza
+mo¿liwo¶ci XMMS-a o otwieranie i odtwarzanie dowolnych plików, które
+mo¿na otworzyæ i odczytaæ przy pomocy biblioteki libsndfile, w tym
+WAV, AIFF, AU i SVX oraz wiele skompresowanych wersji tych formatów.
 
 %prep
 %setup -q -n %{_orig_name}-%{version}
