@@ -15,6 +15,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libsndfile-devel
 BuildRequires:	libtool
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.125
 BuildRequires:	xmms-devel >= 1.2.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
