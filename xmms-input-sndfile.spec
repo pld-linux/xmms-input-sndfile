@@ -2,7 +2,7 @@
 %define		_orig_name	xmms_sndfile
 
 Summary:	XMMS input plugin that uses libsndfile to read files
-Summary(pl.UTF-8):   Wtyczka wejściowa dla XMMS-a używająca libsndfile do czytania plików
+Summary(pl.UTF-8):	Wtyczka wejściowa dla XMMS-a używająca libsndfile do czytania plików
 Name:		xmms-input-sndfile
 Version:	1.2
 Release:	1
