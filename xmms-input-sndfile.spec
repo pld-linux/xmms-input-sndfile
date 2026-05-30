@@ -5,11 +5,12 @@ Summary:	XMMS input plugin that uses libsndfile to read files
 Summary(pl.UTF-8):	Wtyczka wejściowa dla XMMS-a używająca libsndfile do czytania plików
 Name:		xmms-input-sndfile
 Version:	1.2
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://www.zipworld.com.au/~erikd/XMMS/%{_orig_name}-%{version}.tar.gz
 # Source0-md5:	6028307cf7b1310f0c302a4a0c212ae9
+Patch0:		cflags.patch
 URL:		http://www.xmms.org/plugins_input.html#122
 BuildRequires:	libsndfile-devel
 BuildRequires:	pkgconfig
@@ -31,8 +32,12 @@ WAV, AIFF, AU i SVX oraz wiele skompresowanych wersji tych formatów.
 
 %prep
 %setup -q -n %{_orig_name}-%{version}
+%patch -P0 -p1
 
 %build
+%{__aclocal}
+%{__autoconf}
+%{__automake}
 %configure
 
 %{__make}

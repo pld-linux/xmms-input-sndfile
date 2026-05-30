@@ -1,0 +1,13 @@
+--- xmms_sndfile-1.2/Makefile.am.orig	2003-07-12 01:55:48.000000000 +0200
++++ xmms_sndfile-1.2/Makefile.am	2026-05-30 15:16:20.908955433 +0200
+@@ -7,8 +7,8 @@
+ 
+ libxmms_sndfile_la_LDFLAGS = -module -avoid-version -lsndfile
+ 
+-COMMON_CFLAGS = -Wall -Wstrict-prototypes -O3 -I$(top_builddir) -D_REENTRANT @GTK_CFLAGS@
++COMMON_CFLAGS = -Wall -Wstrict-prototypes -I$(top_builddir) -D_REENTRANT @GTK_CFLAGS@
+ COMMON_SRC = xmms_sndfile.c xmms_sndfile.h
+ 
+-CFLAGS = $(COMMON_CFLAGS) $(SNDFILE_CFLAGS)
++CFLAGS += $(COMMON_CFLAGS) $(SNDFILE_CFLAGS)
+ libxmms_sndfile_la_SOURCES = $(COMMON_SRC)
