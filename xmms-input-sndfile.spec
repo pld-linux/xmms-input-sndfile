@@ -6,7 +6,7 @@ Summary(pl.UTF-8):	Wtyczka wejściowa dla XMMS-a używająca libsndfile do czyta
 Name:		xmms-input-sndfile
 Version:	1.2
 Release:	3
-License:	GPL
+License:	GPL v2+
 Group:		X11/Applications/Multimedia
 Source0:	http://www.zipworld.com.au/~erikd/XMMS/%{src_name}-%{version}.tar.gz
 # Source0-md5:	6028307cf7b1310f0c302a4a0c212ae9
