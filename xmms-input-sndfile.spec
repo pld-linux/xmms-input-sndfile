@@ -1,5 +1,5 @@
 
-%define		_orig_name	xmms_sndfile
+%define		src_name	xmms_sndfile
 
 Summary:	XMMS input plugin that uses libsndfile to read files
 Summary(pl.UTF-8):	Wtyczka wejściowa dla XMMS-a używająca libsndfile do czytania plików
@@ -8,11 +8,17 @@ Version:	1.2
 Release:	3
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://www.zipworld.com.au/~erikd/XMMS/%{_orig_name}-%{version}.tar.gz
+Source0:	http://www.zipworld.com.au/~erikd/XMMS/%{src_name}-%{version}.tar.gz
 # Source0-md5:	6028307cf7b1310f0c302a4a0c212ae9
 Patch0:		cflags.patch
+Patch1:		%{src_name}-ac.patch
 URL:		http://www.xmms.org/plugins_input.html#122
-BuildRequires:	libsndfile-devel
+BuildRequires:	autoconf >= 2.50
+BuildRequires:	automake
+BuildRequires:	glib-devel >= 1.2.2
+BuildRequires:	gtk+-devel >= 1.2.2
+BuildRequires:	libsndfile-devel >= 1.0.2
+BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.125
 BuildRequires:	xmms-devel >= 1.2.3
@@ -31,12 +37,15 @@ można otworzyć i odczytać przy pomocy biblioteki libsndfile, w tym
 WAV, AIFF, AU i SVX oraz wiele skompresowanych wersji tych formatów.
 
 %prep
-%setup -q -n %{_orig_name}-%{version}
+%setup -q -n %{src_name}-%{version}
 %patch -P0 -p1
+%patch -P1 -p1
 
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure
 
@@ -49,7 +58,7 @@ rm -rf $RPM_BUILD_ROOT
 	 DESTDIR=$RPM_BUILD_ROOT
 
 # useless
-rm -f $RPM_BUILD_ROOT%{xmms_input_plugindir}/*.la
+%{__rm} $RPM_BUILD_ROOT%{xmms_input_plugindir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -57,4 +66,4 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS TODO NEWS README ChangeLog
-%attr(755,root,root) %{xmms_input_plugindir}/*.so
+%{xmms_input_plugindir}/*.so

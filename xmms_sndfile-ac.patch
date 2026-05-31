@@ -1,0 +1,143 @@
+--- xmms_sndfile-1.2/configure.ac.orig	2026-05-31 06:02:40.932193160 +0200
++++ xmms_sndfile-1.2/configure.ac	2026-05-31 06:03:21.548639789 +0200
+@@ -36,8 +36,8 @@ dnl check for libraries
+ 
+ AC_CHECK_LIB(m,main)
+ 
+-AM_PATH_GLIB(1.2.2,,AC_MSG_ERROR([*** GLIB >= 1.2.2 not installed - please install first ***]))
+-AM_PATH_GTK(1.2.2,,AC_MSG_ERROR([*** GTK+ >= 1.2.2 not installed - please install first ***]))
++AM_PATH_GLIB(1.2.2,,[AC_MSG_ERROR([*** GLIB >= 1.2.2 not installed - please install first ***])])
++AM_PATH_GTK(1.2.2,,[AC_MSG_ERROR([*** GTK+ >= 1.2.2 not installed - please install first ***])])
+ 
+ #-----------------------------------------------------------------------------
+ 
+@@ -63,7 +63,7 @@ else
+ 
+ #-----------------------------------------------------------------------------
+ 
+-AM_PATH_XMMS(1.0.0, , AC_MSG_ERROR([*** XMMS >= 1.0.0 not installed - please install first ***]))
++AM_PATH_XMMS(1.0.0, , [AC_MSG_ERROR([*** XMMS >= 1.0.0 not installed - please install first ***])])
+ 
+ AC_SUBST(VERSION)
+ AC_SUBST(SNDFILE_CFLAGS)
+--- xmms_sndfile-1.2/acinclude.m4.orig	2026-05-31 06:37:27.290890385 +0200
++++ xmms_sndfile-1.2/acinclude.m4	2026-05-31 06:43:59.455432514 +0200
+@@ -21,8 +21,8 @@ dnl    3) If 1) and 2) fails and not cro
+ dnl    4) If 1) and 2) fails and cross compiling then guess based on target.
+ 
+ AC_DEFUN([AC_C_FIND_ENDIAN],
+-[AC_CACHE_CHECK(processor byte ordering, 
+-	ac_cv_c_byte_order,
++[AC_CACHE_CHECK([processor byte ordering], 
++	ac_cv_c_byte_order, [
+ 
+ # Initialize to unknown
+ ac_cv_c_byte_order=unknown
+@@ -31,35 +31,35 @@ if test x$ac_cv_header_endian_h = xyes ;
+ 
+ 	# First try <endian.h> which should set BYTE_ORDER.
+ 
+-	[AC_TRY_LINK([
++	AC_TRY_LINK([
+ 		#include <endian.h>
+ 		#if BYTE_ORDER != LITTLE_ENDIAN
+ 			not big endian
+ 		#endif
+-		], return 0 ;, 
+-			ac_cv_c_byte_order=little
+-		)]
++		], [return 0 ;], 
++			[ac_cv_c_byte_order=little]
++		)
+ 				
+-	[AC_TRY_LINK([
++	AC_TRY_LINK([
+ 		#include <endian.h>
+ 		#if BYTE_ORDER != BIG_ENDIAN
+ 			not big endian
+ 		#endif
+-		], return 0 ;, 
+-			ac_cv_c_byte_order=big
+-		)]
++		], [return 0 ;], 
++			[ac_cv_c_byte_order=big]
++		)
+ 
+ 	fi
+ 
+ if test $ac_cv_c_byte_order = unknown ; then
+ 
+-	[AC_TRY_LINK([
++	AC_TRY_LINK([
+ 		#include <sys/types.h>
+ 		#include <sys/param.h>
+ 		#if !BYTE_ORDER || !BIG_ENDIAN || !LITTLE_ENDIAN
+ 			bogus endian macros
+ 		#endif
+-		], return 0 ;, 
++		], [return 0 ;], 
+ 
+ 		[AC_TRY_LINK([
+ 			#include <sys/types.h>
+@@ -67,8 +67,8 @@ if test $ac_cv_c_byte_order = unknown ;
+ 			#if BYTE_ORDER != LITTLE_ENDIAN
+ 				not big endian
+ 			#endif
+-			], return 0 ;, 
+-				ac_cv_c_byte_order=little
++			], [return 0 ;], 
++				[ac_cv_c_byte_order=little]
+ 			)]
+ 				
+ 		[AC_TRY_LINK([
+@@ -77,11 +77,11 @@ if test $ac_cv_c_byte_order = unknown ;
+ 			#if BYTE_ORDER != LITTLE_ENDIAN
+ 				not big endian
+ 			#endif
+-			], return 0 ;, 
+-				ac_cv_c_byte_order=little
++			], [return 0 ;], 
++				[ac_cv_c_byte_order=little]
+ 			)]
+ 
+-		)]
++		)
+ 
+  	fi
+ 
+@@ -115,8 +115,8 @@ if test $ac_cv_c_byte_order = unknown ;
+ 			u.l = 1 ;
+ 			return (u.c [sizeof (long) - 1] == 1);
+ 			}
+-			]], , ac_cv_c_byte_order=big, 
+-			ac_cv_c_byte_order=unknown
++			]], , [ac_cv_c_byte_order=big], 
++			[ac_cv_c_byte_order=unknown]
+ 			)
+ 
+ 		AC_TRY_RUN(
+@@ -128,14 +128,13 @@ if test $ac_cv_c_byte_order = unknown ;
+ 			} u ;
+ 			u.l = 1 ;
+ 			return (u.c [0] == 1);
+-			}]], , ac_cv_c_byte_order=little, 
+-			ac_cv_c_byte_order=unknown
++			}]], , [ac_cv_c_byte_order=little], 
++			[ac_cv_c_byte_order=unknown]
+ 			)
+ 		fi	
+ 	fi
+ 
+-)
+-]
++])
+ 
+ if test $ac_cv_c_byte_order = big ; then
+ 	ac_cv_c_big_endian=1
+@@ -154,5 +153,5 @@ else
+ 	AC_MSG_WARN([[*****************************************************************]])
+ 	fi
+ 
+-)# AC_C_FIND_ENDIAN
++])# AC_C_FIND_ENDIAN
+ 
